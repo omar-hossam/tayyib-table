@@ -1,33 +1,3 @@
-[x-cloak] { display: none !important; }
+@import "tailwindcss";
 
-.product-header {
-  padding: 0;
-}
-.product-header div {
-  width: 100%;
-  height: 250px;
-  display: flex;
-}
-.product-header img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: inline-block;
-}
-.product-price {
-  color: darkgreen;
-  font-style: italic;
-  text-decoration: underline;
-}
-.quantity {
-  display: grid; 
-  grid-template-columns: repeat(3, 1fr)
-}
-.category {
-  background-color: #ddd;
-  border: 2px solid #999;
-  border-radius: 18px;
-  padding: 8px 10px;
-  display: inline-block;
-}
+[x-cloak] { display: none !important; }
