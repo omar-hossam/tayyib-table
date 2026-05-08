@@ -5,8 +5,8 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "dev": "eleventy --serve",
-    "build": "eleventy",
+    "dev": "eleventy --serve & node esbuild.config.js --watch",
+    "build": "eleventy && node esbuild.config.js",
     "admin": "pnpm dlx decap-server",
     "clean": "rm -rf _site",
     "debug": "DEBUG=Eleventy* eleventy"
@@ -18,7 +18,11 @@
   "devDependencies": {
     "@11ty/eleventy": "^3.1.5",
     "@tailwindcss/postcss": "^4.2.4",
+    "esbuild": "^0.28.0",
     "postcss": "^8.5.14",
     "tailwindcss": "^4.2.4"
+  },
+  "dependencies": {
+    "alpinejs": "^3.15.12"
   }
 }

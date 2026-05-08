@@ -2,16 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <link rel="stylesheet" href="/css/style.css">
   <title>{{ title }}</title>
 </head>
 <body>
   <header>
-    
+    <a href="/menu">Order Now</a>
+    <a href="/cart">Cart</a>
+    <a href="/">Home</a>
   </header>
   <main>
     {{ content | safe }}
   </main>
+  
+  <script src="/js/main.js" type="module"></script>
 </body>
 </html>
