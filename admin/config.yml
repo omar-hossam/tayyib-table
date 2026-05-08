@@ -16,5 +16,6 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Price", name: "price", widget: "number", value_type: "float" }
+      - { label: "Category", name: "category", widget: "select", options: ["Meats", "Small Plates", "Artisanal Mocktails", "Gourmet Desserts"] }
       - { label: "Description", name: "body", widget: "markdown" }
       - { label: "Product Image", name: "image", widget: "image" }

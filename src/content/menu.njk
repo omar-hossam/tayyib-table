@@ -3,17 +3,68 @@ layout: base.njk
 title: Tayyib Table - Menu
 ---
 
-<h2>Our Products</h2>
-<ul>
-  {% for product in collections.products %}
-    <li>
-      <strong>{{ product.data.title }}</strong> - ${{ product.data.price }}
-      <div>
-        {{ product.content | safe }}
+<section x-data="{ 
+    search: '', 
+    filter: 'All' 
+}" class="container">
+  <header class="group">
+    <div class="grid">
+      <input type="search" x-model="search" placeholder="Search for food...">
+      
+      
+      <select x-model="filter">
+        <option value="All">All Categories</option>
+        <option value="Meats">Meats</option>
+        <option value="Small Plates">Small Plates</option>
+        <option value="Artisanal Mocktails">Artisanal Mocktails</option>
+        <option value="Gourmet Desserts">Gourmet Desserts</option>
+      </select>
+    </div>
+  </header>
+
+  <div class="grid">
+    {% for product in collections.products %}
+    <article 
+      x-show="
+        (filter === 'All' || '{{ product.data.category }}' === filter) && 
+        ('{{ product.data.title }}'.toLowerCase().includes(search.toLowerCase()))
+      "
+      x-data="{ count: 0 }"
+      x-transition
+    >
+      <header class="product-header">
+        <div>
+          <img src="{{ product.data.image }}" alt="{{ product.data.title }}">
+        </div>
+      </header>
+      
+      <div class="grid">
+        <h3>{{ product.data.title }}</h3>
+        <p style="text-align: right;" class="product-price">${{ product.data.price }}</p>
       </div>
-      {% if product.data.image %}
-        <img src="{{ product.data.image }}" alt="{{ product.data.title }}">
-      {% endif %}
-    </li>
-  {% endfor %}
-</ul>
+      
+      <p>{{ product.content | safe }}</p>
+      
+      <span class="category">{{ product.data.category }}</span>
+      <footer class="grid">
+        <div class="quantity">
+          <button @click="count > 0 ? count-- : count -= 0" class="contrast" style="border-top-right-radius: 0; border-right: 0; border-bottom-right-radius: 0">
+            <svg xmlns="http://www.w3.org/2000/svg" style="width: 2.2rem; height: 2.2rem" viewBox="0 0 256 256"><rect  fill="none"/><line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+          </button>
+          
+          <p x-text="count" style="border-radius: 0; font-size: 1.5rem; font-weight: bold; display: flex; justify-content: center; align-items: center; height: 100%; background-color: var(--pico-secondary); color: #fff; "></p>
+          
+          <button @click="count++" class="contrast" style="border-top-left-radius: 0; border-left: 0; border-bottom-left-radius: 0">
+            <svg xmlns="http://www.w3.org/2000/svg" style="width: 2.2rem; height: 2.2rem" viewBox="0 0 256 256"><rect fill="none"/><line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="128" y1="40" x2="128" y2="216" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+          </button>
+        </div>
+        <button>Add to Cart</button>
+      </footer>
+    </article>
+    {% endfor %}
+  </div>
+
+  <p x-show="document.querySelectorAll('article:not([style*=\'display: none\'])').length === 0" x-cloak>
+    No products found... 🍕
+  </p>
+</section>
