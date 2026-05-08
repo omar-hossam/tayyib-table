@@ -1,0 +1,20 @@
+local_backend: true
+
+backend:
+  name: git-gateway
+  branch: main # or master
+
+media_folder: "src/images/products" # Where images/icons are saved
+public_folder: "/images/products"   # Where the site looks for them
+
+collections:
+  - name: "products"
+    label: "Products"
+    folder: "src/content/products" # Where your product .md files will live
+    create: true # Allow adding new products
+    slug: "{{title}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Price", name: "price", widget: "number", value_type: "float" }
+      - { label: "Description", name: "body", widget: "markdown" }
+      - { label: "Product Image", name: "image", widget: "image" }

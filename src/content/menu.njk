@@ -1,0 +1,19 @@
+---
+layout: base.njk
+title: Tayyib Table - Menu
+---
+
+<h2>Our Products</h2>
+<ul>
+  {% for product in collections.products %}
+    <li>
+      <strong>{{ product.data.title }}</strong> - ${{ product.data.price }}
+      <div>
+        {{ product.content | safe }}
+      </div>
+      {% if product.data.image %}
+        <img src="{{ product.data.image }}" alt="{{ product.data.title }}">
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
