@@ -6,10 +6,36 @@
   <title>{{ title }}</title>
 </head>
 <body>
-  <header>
-    <a href="/menu">Order Now</a>
-    <a href="/cart">Cart</a>
-    <a href="/">Home</a>
+    <header>
+      <nav class="fixed top-0 left-0 w-full z-50 flex py-4 px-6 justify-between items-center backdrop-blur-md bg-white/10 border-b border-white/20 shadow-lg shadow-black/5">
+      <ul class="flex items-center">
+        <li class="bg-white rounded-full w-20 h-20 outline-2 outline-transparent hover:outline-yellow-900 transition transition-200">
+          <a href="/"><img src="/images/logo.jpeg" alt="Tayyib Table logo" class="w-full h-full rounded-full shadow-sm object-contain object-center" /></a>
+        </li>
+      </ul>
+      <ul class="flex gap-6 items-center">
+        <li><a href="/" class="text-gray-500">Home</a></li>
+        
+        <li><a href="/menu" class="flex gap-1 relative after:absolute after:w-0 after:h-[2px] after:-bottom-2 after:left-1/2 after:-translate-x-1/2 after:bg-transparent hover:after:bg-yellow-900 hover:after:w-full hover:text-yellow-900 transition duration-100 after:transition-all">Menu
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" class="w-5 h-5"><rect fill="none"/><line x1="96" y1="160" x2="88" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="160" y1="160" x2="168" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="128" y1="160" x2="128" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M173.65,65.12A48,48,0,1,1,184,160H72A48,48,0,1,1,82.35,65.12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M80,80a48,48,0,0,1,96,0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M200,157.27V208a8,8,0,0,1-8,8H64a8,8,0,0,1-8-8V157.27" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+        </a></li>
+        <li><a href="/#location" class="flex gap-1 relative after:absolute after:w-0 after:h-[2px] after:-bottom-2 after:left-1/2 after:-translate-x-1/2 after:bg-transparent hover:after:bg-yellow-900 hover:after:w-full hover:text-yellow-900 transition duration-100 after:transition-all">Location
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" class="w-5 h-5"><rect fill="none"/><circle cx="128" cy="104" r="32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M208,104c0,72-80,128-80,128S48,176,48,104a80,80,0,0,1,160,0Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+        </a></li>
+        <li><a href="/#contact" class="flex gap-1 relative after:absolute after:w-0 after:h-[2px] after:-bottom-2 after:left-1/2 after:-translate-x-1/2 after:bg-transparent hover:after:bg-yellow-900 hover:after:w-full hover:text-yellow-900 transition duration-100 after:transition-all">Contact
+        
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" class="w-5 h-5"><rect fill="none"/><path d="M164.39,145.34a8,8,0,0,1,7.59-.69l47.16,21.13a8,8,0,0,1,4.8,8.3A48.33,48.33,0,0,1,176,216,136,136,0,0,1,40,80,48.33,48.33,0,0,1,81.92,32.06a8,8,0,0,1,8.3,4.8l21.13,47.2a8,8,0,0,1-.66,7.53L89.32,117a7.93,7.93,0,0,0-.54,7.81c8.27,16.93,25.77,34.22,42.75,42.41a7.92,7.92,0,0,0,7.83-.59Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+        </a></li>
+      </ul>
+      <ul class="flex gap-3 items-center">
+        <li><a href="/cart" class="bg-yellow-400 border-2 border-yellow-900 rounded-2xl py-2 px-5 flex gap-2">Cart
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" class="w-5 h-5"><rect width="256" height="256" fill="none"/><circle cx="88" cy="216" r="16"/><circle cx="192" cy="216" r="16"/><path d="M16,32H40L76.75,164.28A16,16,0,0,0,92.16,176H191a16,16,0,0,0,15.42-11.72L232,72H51.11" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+        </a></li>
+        <li><button class="border-2 border-slate-500 p-1 cursor-pointer rounded-lg items-center justify-center flex">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-slate-500" viewBox="0 0 256 256"><rect fill="none"/><path d="M108.11,28.11A96.09,96.09,0,0,0,227.89,147.89,96,96,0,1,1,108.11,28.11Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+        </button></li>
+      </ul>
+    </nav>
   </header>
   <main>
     {{ content | safe }}
