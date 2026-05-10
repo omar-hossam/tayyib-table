@@ -5,22 +5,22 @@
   <link rel="stylesheet" href="/css/style.css">
   <title>{{ title }}</title>
 </head>
-<body>
+<body x-data="{ sidebar: false }">
   <header class="bg-[#fbf5ee]">
     <nav class="flex items-center justify-between px-2 py-1">
       <ul class="flex gap-5">
-        <li><a href="/"><img src="/images/logo.png" alt="Tayyib Table" class="w-20" /></a></li>
+        <li><a href="/"><img src="/images/logo.png" alt="Tayyib Table" class="w-15 sm:w-20" /></a></li>
 
         <ul class="hidden sm:flex items-center gap-10">
           <li><a href="/" class="text-[#236730] font-bold relative after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[3px] after:bg-current">Home</a></li>
           <li><a href="/menu" class="font-bold hover:text-[#236730] transition transition-200">Menu</a></li>
           <li><a href="/#about-us" class="font-bold hover:text-[#236730] transition transition-200">About Us</a></li>
-          <li><a href="/offers" class="font-bold hover:text-[#236730] transition transition-200">Offers</a></li>
-          <li><a href="/#locatio  n" class="font-bold hover:text-[#236730] transition transition-200">Location</a></li>
+          <li><a href="/#offers" class="font-bold hover:text-[#236730] transition transition-200">Offers</a></li>
+          <li><a href="/#location" class="font-bold hover:text-[#236730] transition transition-200">Location</a></li>
           <li><a href="/#contact" class="font-bold hover:text-[#236730] transition transition-200">Contact</a></li>
         </ul>
       </ul>
-      <ul class="flex items-center gap-3">
+      <ul class="flex items-center gap-2 sm:gap-3">
         <li class="hidden sm:block">
           <button class="border flex gap-1 items-center border-2 border-[#236730] px-3 py-2 rounded-lg font-bold">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-[#236730]" viewBox="0 0 256 256"><rect  fill="none"/><path d="M188,184H91.17a16,16,0,0,1-15.74-13.14L48.73,24H24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="92" cy="204" r="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="188" cy="204" r="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M70.55,144H196.1a16,16,0,0,0,15.74-13.14L224,64H56" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
@@ -33,14 +33,40 @@
           </button>
         </li>
         
+        <!-- PHONE -->
+        <li class="sm:hidden"><a href="/cart">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-[#236730]" viewBox="0 0 256 256"><rect  fill="none"/><path d="M188,184H91.17a16,16,0,0,1-15.74-13.14L48.73,24H24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="92" cy="204" r="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="188" cy="204" r="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M70.55,144H196.1a16,16,0,0,0,15.74-13.14L224,64H56" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+        </a></li>
+        
         <li class="flex justify-center items-center sm:hidden">
-          <button class="p-1">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-[#236730]" viewBox="0 0 256 256"><rect fill="none"/><line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="40" y1="64" x2="216" y2="64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="40" y1="192" x2="216" y2="192" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+          <button class="p-1" @click="sidebar = true">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-[#236730]" viewBox="0 0 256 256"><rect fill="none"/><line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="40" y1="64" x2="216" y2="64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="40" y1="192" x2="216" y2="192" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
           </button>
         </li>
       </ul>
     </nav>
   </header>
+  <aside x-show="sidebar === true" class="fixed top-0 left-0 w-screen h-screen bg-[#fbf5eeee]" x-transition>
+    <button @click="sidebar = false" class="absolute top-4 right-4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-black" viewBox="0 0 256 256"><rect fill="none"/><line x1="200" y1="56" x2="56" y2="200" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="200" y1="200" x2="56" y2="56" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+    </button>
+    <ul class="flex flex-col gap-8 w-full pt-15 items-center">
+      <li><a href="/" class="text-[#236730] font-bold relative after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[3px] after:bg-current">Home</a></li>
+      <li><a href="/menu" class="font-bold hover:text-[#236730] transition transition-200">Menu</a></li>
+      <li><a href="/#about-us" class="font-bold hover:text-[#236730] transition transition-200">About Us</a></li>
+      <li><a href="/offers" class="font-bold hover:text-[#236730] transition transition-200">Offers</a></li>
+      <li><a href="/#location" class="font-bold hover:text-[#236730] transition transition-200">Location</a></li>
+      <li><a href="/#contact" class="font-bold hover:text-[#236730] transition transition-200">Contact</a></li>
+    
+      <li>
+          <button class="border border-2 rounded-lg font-bold py-2 px-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 256 256"><rect fill="none"/><path d="M108.11,28.11A96.09,96.09,0,0,0,227.89,147.89,96,96,0,1,1,108.11,28.11Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+          </button>
+        </li>
+      
+      
+    </ul>
+  </aside>
   <main>
     {{ content | safe }}
   </main>
