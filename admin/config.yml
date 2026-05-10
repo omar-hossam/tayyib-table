@@ -3,19 +3,64 @@ local_backend: true
 backend:
   name: git-gateway
   branch: main # or master
+  # For local development, git-gateway will work with netlify-identity-widget
 
-media_folder: "src/images/products" # Where images/icons are saved
-public_folder: "/images/products"   # Where the site looks for them
+media_folder: "src/images/gallery"
+public_folder: "/images/gallery"
+
+# Local development settings
+site_url: http://localhost:8080
+display_url: http://localhost:8080
 
 collections:
   - name: "products"
     label: "Products"
-    folder: "src/content/products" # Where your product .md files will live
-    create: true # Allow adding new products
-    slug: "{{title}}"
+    label_singular: "Product"
+    folder: "src/content/products"
+    create: true
+    slug: "{{slugify(title)}}"
+    identifier_field: "title"
+    summary: "{{title}} - ${{price}}"
+    preview_path: "products/{{slugify(title)}}"
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Price", name: "price", widget: "number", value_type: "float" }
-      - { label: "Category", name: "category", widget: "select", options: ["Meats", "Small Plates", "Artisanal Mocktails", "Gourmet Desserts"] }
-      - { label: "Description", name: "body", widget: "markdown" }
-      - { label: "Product Image", name: "image", widget: "image" }
+      - { label: "Title", name: "title", widget: "string", required: true }
+      - { label: "Price", name: "price", widget: "number", value_type: "float", step: 0.01, required: true }
+      - { label: "Price After Discount", name: "price_discount", widget: "number", value_type: "float", step: 0.01, required: false }
+      - { label: "Category", name: "category", widget: "select", options: 
+          [
+            "Burgers & Sandwiches", 
+            "Grilled Chicken", 
+            "Meat & Beef", 
+            "Sides", 
+            "Drinks", 
+            "Desserts", 
+            "Wraps & Shawarma", 
+            "Specials / Offers"
+          ], required: true
+      }
+      - { label: "Description", name: "body", widget: "markdown", required: true }
+      - { label: "Product Image", name: "image", widget: "image", required: true }
+
+  - name: "offers"
+    label: "Offers"
+    label_singular: "Offer"
+    folder: "src/content/offers"
+    create: true
+    slug: "{{slugify(alt_text)}}"
+    identifier_field: "alt_text"
+    fields: 
+      - { label: "Offer Image", name: "image", widget: "image", required: true }
+      - { label: "Alternative Text", name: "alt_text", widget: "string", required: true }
+
+  - name: "reviews"
+    label: "Customer Reviews"
+    label_singular: "Review"
+    folder: "src/content/reviews"
+    create: true
+    slug: "{{slugify(name)}}-{{year}}"
+    identifier_field: "name"
+    fields: 
+      - { label: "Customer Name", name: "name", widget: "string", required: true }
+      - { label: "Stars", name: "stars", widget: "number", min: 1, max: 5, step: 1, hint: "Rating from 1-5 stars", required: true }
+      - { label: "Review Content", name: "content", widget: "markdown", required: true }
+      - { label: "Date", name: "date", widget: "datetime", default: "", required: false }
