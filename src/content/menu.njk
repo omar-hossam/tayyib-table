@@ -3,68 +3,155 @@ layout: base.njk
 title: Tayyib Table - Menu
 ---
 
-<section x-data="{ 
+<main x-data="{ 
     search: '', 
     filter: 'All' 
-}" class="container">
-  <header class="group">
-    <div class="grid">
-      <input type="search" x-model="search" placeholder="Search for food...">
-      
-      
-      <select x-model="filter">
-        <option value="All">All Categories</option>
-        <option value="Meats">Meats</option>
-        <option value="Small Plates">Small Plates</option>
-        <option value="Artisanal Mocktails">Artisanal Mocktails</option>
-        <option value="Gourmet Desserts">Gourmet Desserts</option>
-      </select>
-    </div>
-  </header>
-
-  <div class="grid">
-    {% for product in collections.products %}
-    <article 
-      x-show="
-        (filter === 'All' || '{{ product.data.category }}' === filter) && 
-        ('{{ product.data.title }}'.toLowerCase().includes(search.toLowerCase()))
-      "
-      x-data="{ count: 0 }"
-      x-transition
-    >
-      <header class="product-header">
-        <div>
-          <img src="{{ product.data.image }}" alt="{{ product.data.title }}">
-        </div>
-      </header>
-      
-      <div class="grid">
-        <h3>{{ product.data.title }}</h3>
-        <p style="text-align: right;" class="product-price">${{ product.data.price }}</p>
-      </div>
-      
-      <p>{{ product.content | safe }}</p>
-      
-      <span class="category">{{ product.data.category }}</span>
-      <footer class="grid">
-        <div class="quantity">
-          <button @click="count > 0 ? count-- : count -= 0" class="contrast" style="border-top-right-radius: 0; border-right: 0; border-bottom-right-radius: 0">
-            <svg xmlns="http://www.w3.org/2000/svg" style="width: 2.2rem; height: 2.2rem" viewBox="0 0 256 256"><rect  fill="none"/><line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
-          </button>
-          
-          <p x-text="count" style="border-radius: 0; font-size: 1.5rem; font-weight: bold; display: flex; justify-content: center; align-items: center; height: 100%; background-color: var(--pico-secondary); color: #fff; "></p>
-          
-          <button @click="count++" class="contrast" style="border-top-left-radius: 0; border-left: 0; border-bottom-left-radius: 0">
-            <svg xmlns="http://www.w3.org/2000/svg" style="width: 2.2rem; height: 2.2rem" viewBox="0 0 256 256"><rect fill="none"/><line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="128" y1="40" x2="128" y2="216" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
-          </button>
-        </div>
-        <button>Add to Cart</button>
-      </footer>
-    </article>
-    {% endfor %}
+}" class="px-2 py-4 sm:p-5 bg-[#fefaee]">
+<!-- Head -->
+<section class="flex flex-col gap-3 sm:gap-0 sm:flex-row justify-between items-center">
+  <div>
+    <h1 class="text-3xl text-[var(--green)] font-bold bg-[url(/images/div.png)] bg-bottom bg-repeat-x pb-8 text-center sm:inline-block">Our Menu</h1>
+    <p class="text-center text-slate-600">Authentic halal flavors, made with love.</p>
   </div>
-
-  <p x-show="document.querySelectorAll('article:not([style*=\'display: none\'])').length === 0" x-cloak>
-    No products found... 
-  </p>
+  <div class="flex flex-col sm:flex-row gap-4 mb-8">
+  <!-- Search Input -->
+  <div class="flex items-center bg-white border-2 border-slate-300 rounded-xl focus-within:border-emerald-700 focus-within:ring-2 focus-within:ring-emerald-700/20 transition-all duration-200">
+  <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 ml-4 text-slate-400" viewBox="0 0 256 256">
+    <rect fill="none"/>
+    <circle cx="112" cy="112" r="80" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+    <line x1="168.57" y1="168.57" x2="224" y2="224" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+  </svg>
+  <input 
+    type="search" 
+    x-model="search" 
+    placeholder="Search for food..." 
+    class="w-full px-4 py-3 focus:outline-none bg-transparent text-gray-800 placeholder:text-gray-400"
+  >
+</div>
+  
+  <!-- Category Filter -->
+<div class="sm:w-64">
+  <div class="flex items-center bg-white border-2 border-slate-300 rounded-xl focus-within:border-emerald-700 focus-within:ring-2 focus-within:ring-emerald-700/20 transition-all duration-200">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 ml-4 text-slate-400" viewBox="0 0 256 256">
+      <rect width="256" height="256" fill="none"/>
+      <path d="M34.1,61.38A8,8,0,0,1,40,48H216a8,8,0,0,1,5.92,13.38L152,136v58.65a8,8,0,0,1-3.56,6.66l-32,21.33A8,8,0,0,1,104,216V136Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+    </svg>
+    <select 
+      name="category" 
+      x-model="filter"
+      class="w-full px-4 py-3 focus:outline-none bg-transparent text-gray-700 appearance-none cursor-pointer"
+    >
+      <option value="All">All Categories</option>
+      <option value="burgers-sandwiches">Burgers & Sandwiches</option>
+      <option value="grilled-chicken">Grilled Chicken</option>
+      <option value="meat-beef">Meat & Beef</option>
+      <option value="sides">Sides</option>
+      <option value="drinks">Drinks</option>
+      <option value="desserts">Desserts</option>
+      <option value="wraps-shawarma">Wraps & Shawarma</option>
+      <option value="specials-offers">Specials / Offers</option>
+    </select>
+  </div>
+</div>
+</div>
 </section>
+<!-- Products -->
+<section></section>
+<!-- Trust -->
+<section class="border border-2 rounded-2xl border-slate-300 sm:py-0 sm:px-3  grid grid-cols-1 sm:grid-cols-4">
+  <!-- 1 -->
+  <div class="flex gap-3 items-center py-2 px-3 sm:py-3 sm:px-0 border-b border-b-2 sm:border-b-0 sm:border-r sm:border-r-2 border-slate-300">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-[var(--green)]" viewBox="0 0 256 256"><rect fill="none"/><path d="M152,206.4a88,88,0,0,1,0-156.8,88,88,0,1,0,0,156.8Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><polygon points="177.46 128 160 98.33 192.59 106.4 214.39 80 217.06 114.65 248 128 217.06 141.35 214.39 176 192.59 149.6 160 157.67 177.46 128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+    <div class="flex flex-col gap-1/2">
+      <p class="text-[var(--green)]"><strong>100% Halal</strong></p>
+      <p class="text-slate-600 text-sm">Certifieid halal ingredients</p>
+    </div>
+  </div>
+  
+  <!-- 2 -->
+  <div class="flex gap-3 items-center py-2 px-3 sm:py-3 border-b border-b-2 sm:border-b-0 sm:border-r sm:border-r-2 border-slate-300">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-[var(--green)]" viewBox="0 0 256 256"><rect  fill="none"/><path d="M138.54,149.46C106.62,96.25,149.18,43.05,239.63,48.37,245,138.82,191.75,181.38,138.54,149.46Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M88.47,160.47c22.8-38-7.6-76-72.21-72.21C12.46,152.87,50.47,183.27,88.47,160.47Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="56" y1="128" x2="120" y2="192" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M200,88l-61.25,61.25A64,64,0,0,0,120,194.51V224" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+    
+    <div class="flex flex-col gap-1/2">
+      <p class="text-[var(--green)]"><strong>Fresh Ingredients</strong></p>
+      <p class="text-slate-600 text-sm">Sourced daily, made with care</p>
+    </div>
+  </div>
+  
+  <!-- 3 -->
+  <div class="flex gap-3 items-center py-2 px-3 sm:py-3 border-b border-b-2 sm:border-b-0 sm:border-r sm:border-r-2 border-slate-300">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-[var(--green)]" viewBox="0 0 256 256"><rect fill="none"/><line x1="96" y1="160" x2="88" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="160" y1="160" x2="168" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="128" y1="160" x2="128" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M173.65,65.12A48,48,0,1,1,184,160H72A48,48,0,1,1,82.35,65.12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M80,80a48,48,0,0,1,96,0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M200,157.27V208a8,8,0,0,1-8,8H64a8,8,0,0,1-8-8V157.27" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+    
+    <div class="flex flex-col gap-1/2">
+      <p class="text-[var(--green)]"><strong>Authentic Recipes</strong></p>
+      <p class="text-slate-600 text-sm">Traditional flavors you love</p>
+    </div>
+  </div>
+  
+  <!-- 4 -->
+  <div class="flex gap-3 items-center py-2 px-3 sm:py-3">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-[var(--green)]" viewBox="0 0 256 256"><rect fill="none"/><path d="M128,224S24,168,24,102A54,54,0,0,1,78,48c22.59,0,41.94,12.31,50,32,8.06-19.69,27.41-32,50-32a54,54,0,0,1,54,54C232,168,128,224,128,224Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+    
+    <div class="flex flex-col gap-1/2">
+      <p class="text-[var(--green)]"><strong>Made with Love</strong></p>
+      <p class="text-slate-600 text-sm">Every dish, our passion</p>
+    </div>
+  </div>
+</section>
+
+<!--
+  <section class="container">
+    <header class="group">
+      <div class="grid">
+        
+      </div>
+    </header>
+
+    <div class="grid">
+      {% for product in collections.products %}
+      <article 
+        x-show="
+          (filter === 'All' || '{{ product.data.category }}' === filter) && 
+          ('{{ product.data.title }}'.toLowerCase().includes(search.toLowerCase()))
+        "
+        x-data="{ count: 0 }"
+        x-transition
+      >
+        <header class="product-header">
+          <div>
+            <img src="{{ product.data.image }}" alt="{{ product.data.title }}">
+          </div>
+        </header>
+        
+        <div class="grid">
+          <h3>{{ product.data.title }}</h3>
+          <p style="text-align: right;" class="product-price">${{ product.data.price }}</p>
+        </div>
+        
+        <p>{{ product.content | safe }}</p>
+        
+        <span class="category">{{ product.data.category }}</span>
+        <footer class="grid">
+          <div class="quantity">
+            <button @click="count > 0 ? count-- : count -= 0" class="contrast" style="border-top-right-radius: 0; border-right: 0; border-bottom-right-radius: 0">
+              <svg xmlns="http://www.w3.org/2000/svg" style="width: 2.2rem; height: 2.2rem" viewBox="0 0 256 256"><rect  fill="none"/><line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+            </button>
+            
+            <p x-text="count" style="border-radius: 0; font-size: 1.5rem; font-weight: bold; display: flex; justify-content: center; align-items: center; height: 100%; background-color: var(--pico-secondary); color: #fff; "></p>
+            
+            <button @click="count++" class="contrast" style="border-top-left-radius: 0; border-left: 0; border-bottom-left-radius: 0">
+              <svg xmlns="http://www.w3.org/2000/svg" style="width: 2.2rem; height: 2.2rem" viewBox="0 0 256 256"><rect fill="none"/><line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="128" y1="40" x2="128" y2="216" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+            </button>
+          </div>
+          <button>Add to Cart</button>
+        </footer>
+      </article>
+      {% endfor %}
+    </div>
+
+    <p x-show="document.querySelectorAll('article:not([style*=\'display: none\'])').length === 0" x-cloak>
+      No products found... 
+    </p>
+  </section>
+-->
+</main>

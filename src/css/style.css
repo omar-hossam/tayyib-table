@@ -2,3 +2,7 @@
 
 [x-cloak] { display: none !important; }
 
+:root {
+  --green: #236730;
+  --nav: #fbf5ee;
+}

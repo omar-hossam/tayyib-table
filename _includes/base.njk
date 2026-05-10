@@ -46,7 +46,7 @@
       </ul>
     </nav>
   </header>
-  <aside x-show="sidebar === true" class="fixed top-0 left-0 w-screen h-screen bg-[#fbf5eeee]" x-transition>
+  <aside x-show="sidebar === true" class="fixed top-0 left-0 w-screen h-screen bg-[#fbf5eeee] sm:hidden" x-transition>
     <button @click="sidebar = false" class="absolute top-4 right-4">
       <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-black" viewBox="0 0 256 256"><rect fill="none"/><line x1="200" y1="56" x2="56" y2="200" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="200" y1="200" x2="56" y2="56" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
     </button>
@@ -67,9 +67,9 @@
       
     </ul>
   </aside>
-  <main>
-    {{ content | safe }}
-  </main>
+  
+  {{ content | safe }}
+  
   
   <script src="/js/main.js" type="module"></script>
 </body>
