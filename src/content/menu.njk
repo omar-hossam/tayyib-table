@@ -6,7 +6,7 @@ title: Tayyib Table - Menu
 <main x-data="{ 
     search: '', 
     filter: 'All' 
-}" class="px-2 py-4 sm:p-5 bg-[#fefaee]">
+}" class="grid grid-col-1 gap-3 px-2 py-4 sm:p-5 bg-[#fefaee]">
 <!-- Head -->
 <section class="flex flex-col gap-3 sm:gap-0 sm:flex-row justify-between items-center">
   <div>
@@ -41,22 +41,50 @@ title: Tayyib Table - Menu
       x-model="filter"
       class="w-full px-4 py-3 focus:outline-none bg-transparent text-gray-700 appearance-none cursor-pointer"
     >
-      <option value="All">All Categories</option>
-      <option value="burgers-sandwiches">Burgers & Sandwiches</option>
-      <option value="grilled-chicken">Grilled Chicken</option>
-      <option value="meat-beef">Meat & Beef</option>
-      <option value="sides">Sides</option>
-      <option value="drinks">Drinks</option>
-      <option value="desserts">Desserts</option>
-      <option value="wraps-shawarma">Wraps & Shawarma</option>
-      <option value="specials-offers">Specials / Offers</option>
+      <option value="All" selected>All Categories</option>
+      <option value="Burgers & Sandwiches">Burgers & Sandwiches</option>
+      <option value="Grilled Chicken">Grilled Chicken</option>
+      <option value="Meat & Beef">Meat & Beef</option>
+      <option value="Sides">Sides</option>
+      <option value="Drinks">Drinks</option>
+      <option value="Desserts">Desserts</option>
+      <option value="Wraps & Shawarma">Wraps & Shawarma</option>
+      <option value="Specials / Offers">Specials / Offers</option>
     </select>
   </div>
 </div>
 </div>
 </section>
+
+
+
 <!-- Products -->
-<section></section>
+  <section>
+    <div class="grid grid-cols-1 sm:grid-cols-3">
+      {% for product in collections.products %}
+      <article x-show="(filter === 'All' || '{{ product.data.category }}' === filter) && ('{{ product.data.title }}'.toLowerCase().includes(search.toLowerCase()))" x-transition>
+        <header class="rounded-lg">
+          <img src="{{ product.data.image }}" alt="{{ product.data.title }}" class="object-cover object-center w-40 h-40" />
+        </header>
+        
+        <h2>{{ product.data.title }}</h2>
+        <p>{{ product.content | safe }}</p>
+        
+        <hr />
+        
+        {% if product.data.price_discount %}
+        <h3>${{ product.data.price_discount }} <span class="text-gray-500">{{ product.data.price }}</span></h3>
+        {% else %}
+        <h3>${{ product.data.price }}</h3>
+        {% endif %}
+        
+      </article>
+      {% endfor %}
+    </div>
+    <p x-show="!$el.previousElementSibling.querySelector('article:not([style*=\'display: none\'])')" x-cloak>No products found..</p>
+  </section>
+
+
 <!-- Trust -->
 <section class="border border-2 rounded-2xl border-slate-300 sm:py-0 sm:px-3  grid grid-cols-1 sm:grid-cols-4">
   <!-- 1 -->

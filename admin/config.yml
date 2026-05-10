@@ -18,10 +18,9 @@ collections:
     label_singular: "Product"
     folder: "src/content/products"
     create: true
-    slug: "{{slugify(title)}}"
     identifier_field: "title"
     summary: "{{title}} - ${{price}}"
-    preview_path: "products/{{slugify(title)}}"
+    preview_path: "products/{{title}}"
     fields:
       - { label: "Title", name: "title", widget: "string", required: true }
       - { label: "Price", name: "price", widget: "number", value_type: "float", step: 0.01, required: true }
@@ -46,7 +45,6 @@ collections:
     label_singular: "Offer"
     folder: "src/content/offers"
     create: true
-    slug: "{{slugify(alt_text)}}"
     identifier_field: "alt_text"
     fields: 
       - { label: "Offer Image", name: "image", widget: "image", required: true }
@@ -57,7 +55,6 @@ collections:
     label_singular: "Review"
     folder: "src/content/reviews"
     create: true
-    slug: "{{slugify(name)}}-{{year}}"
     identifier_field: "name"
     fields: 
       - { label: "Customer Name", name: "name", widget: "string", required: true }

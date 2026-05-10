@@ -42,3 +42,10 @@ yarn-debug.log*
 yarn-error.log*
 logs/
 *.log
+
+# TEMP
+
+src/content/products
+src/content/offers
+src/content/reviews
+src/images/gallery
