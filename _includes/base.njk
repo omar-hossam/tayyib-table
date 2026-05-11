@@ -12,12 +12,7 @@
         <li><a href="/"><img src="/images/logo.png" alt="Tayyib Table" class="w-15 sm:w-20" /></a></li>
 
         <ul class="hidden sm:flex items-center gap-10">
-          <li><a href="/" class="text-[#236730] font-bold relative after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[3px] after:bg-current">Home</a></li>
-          <li><a href="/menu" class="font-bold hover:text-[#236730] transition transition-200">Menu</a></li>
-          <li><a href="/#about-us" class="font-bold hover:text-[#236730] transition transition-200">About Us</a></li>
-          <li><a href="/#offers" class="font-bold hover:text-[#236730] transition transition-200">Offers</a></li>
-          <li><a href="/#location" class="font-bold hover:text-[#236730] transition transition-200">Location</a></li>
-          <li><a href="/#contact" class="font-bold hover:text-[#236730] transition transition-200">Contact</a></li>
+          {% include '_components/reuse/nav-links.njk' %}
         </ul>
       </ul>
       <ul class="flex items-center gap-2 sm:gap-3">
@@ -51,12 +46,7 @@
       <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-black" viewBox="0 0 256 256"><rect fill="none"/><line x1="200" y1="56" x2="56" y2="200" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="200" y1="200" x2="56" y2="56" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
     </button>
     <ul class="flex flex-col gap-8 w-full pt-15 items-center">
-      <li><a href="/" class="text-[#236730] font-bold relative after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[3px] after:bg-current">Home</a></li>
-      <li><a href="/menu" class="font-bold hover:text-[#236730] transition transition-200">Menu</a></li>
-      <li><a href="/#about-us" class="font-bold hover:text-[#236730] transition transition-200">About Us</a></li>
-      <li><a href="/offers" class="font-bold hover:text-[#236730] transition transition-200">Offers</a></li>
-      <li><a href="/#location" class="font-bold hover:text-[#236730] transition transition-200">Location</a></li>
-      <li><a href="/#contact" class="font-bold hover:text-[#236730] transition transition-200">Contact</a></li>
+      {% include '_components/reuse/nav-links.njk' %}
     
       <li>
           <button class="border border-2 rounded-lg font-bold py-2 px-2">
