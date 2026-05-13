@@ -3,11 +3,11 @@ import * as esbuild from 'esbuild';
 const isWatch = process.argv.includes('--watch');
 
 const config = {
-  entryPoints: ['src/js/main.js'],
+  entryPoints: ['assets/main.js'],
   bundle: true,
   minify: !isWatch,
   sourcemap: isWatch,
-  outfile: '_site/js/main.js',
+  outfile: '_site/assets/main.js',
 };
 
 if (isWatch) {

@@ -59,30 +59,32 @@ title: Tayyib Table - Menu
 
 
 <!-- Products -->
-  <section>
-    <div class="grid grid-cols-1 sm:grid-cols-3">
-      {% for product in collections.products %}
-      <article x-show="(filter === 'All' || '{{ product.data.category }}' === filter) && ('{{ product.data.title }}'.toLowerCase().includes(search.toLowerCase()))" x-transition>
-        <header class="rounded-lg">
-          <img src="{{ product.data.image }}" alt="{{ product.data.title }}" class="object-cover object-center w-40 h-40" />
-        </header>
-        
-        <h2>{{ product.data.title }}</h2>
-        <p>{{ product.content | safe }}</p>
-        
-        <hr />
-        
-        {% if product.data.price_discount %}
-        <h3>${{ product.data.price_discount }} <span class="text-gray-500">{{ product.data.price }}</span></h3>
-        {% else %}
-        <h3>${{ product.data.price }}</h3>
-        {% endif %}
-        
-      </article>
-      {% endfor %}
-    </div>
-    <p x-show="!$el.previousElementSibling.querySelector('article:not([style*=\'display: none\'])')" x-cloak>No products found..</p>
-  </section>
+<section>
+  <div class="grid grid-cols-1 sm:grid-cols-3">
+    
+    {% for product in collections.products %}
+    <article x-show="(filter === 'All' || '{{ product.data.category }}' === filter) && ('{{ product.data.title }}'.toLowerCase().includes(search.toLowerCase()))" x-transition>
+      
+      <header class="rounded-lg">
+        <img src="{{ product.data.image }}" alt="{{ product.data.title }}" class="object-cover object-center w-40 h-40" />
+      </header>
+      
+      <h2>{{ product.data.title }}</h2>
+      <p>{{ product.content | safe }}</p>
+      
+      <hr />
+      
+      {% if product.data.price_discount %}
+      <h3>${{ product.data.price_discount }} <span class="text-gray-500">{{ product.data.price }}</span></h3>
+      {% else %}
+      <h3>${{ product.data.price }}</h3>
+      {% endif %}
+      
+    </article>
+    {% endfor %}
+  </div>
+  <p x-show="!$el.previousElementSibling.querySelector('article:not([style*=\'display: none\'])')" x-cloak>No products found..</p>
+</section>
 
 
 <!-- Trust -->
