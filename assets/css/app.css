@@ -3,6 +3,8 @@
 :root {
   --green: #236730;
   --nav: #fbf5ee;
+  --page-bg: #fefaee;
+  --product-card-bd: #e2d4bd;
 }
 
 .current-page {

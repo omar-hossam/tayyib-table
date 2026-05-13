@@ -6,7 +6,7 @@ title: Tayyib Table - Menu
 <main x-data="{ 
     search: '', 
     filter: 'All' 
-}" class="grid grid-col-1 gap-3 px-2 pt-23 pb-4 sm:pt-30 sm:p-5 bg-[#fefaee]">
+}" class="grid grid-col-1 gap-10 px-2 pt-23 pb-4 sm:pt-30 sm:px-10 sm:p-5 bg-[var(--page-bg)]">
 <!-- Head -->
 <section class="flex flex-col gap-3 sm:gap-0 sm:flex-row justify-between items-center">
   <div>
@@ -59,33 +59,46 @@ title: Tayyib Table - Menu
 
 
 <!-- Products -->
-<section>
-  <div class="grid grid-cols-1 sm:grid-cols-3">
+<section class="grid grid-cols-1 gap-5 justify-between sm:grid-cols-3 sm:gap-10">
+  {% for product in collections.products %}
+  <article x-show="(filter === 'All' || '{{ product.data.category }}' === filter) && ('{{ product.data.title }}'.toLowerCase().includes(search.toLowerCase()))" x-transition class="sm:w-80 shadow-xl overflow-hidden rounded-b-2xl relative bg-white">
     
-    {% for product in collections.products %}
-    <article x-show="(filter === 'All' || '{{ product.data.category }}' === filter) && ('{{ product.data.title }}'.toLowerCase().includes(search.toLowerCase()))" x-transition>
+    <header class="rounded-xl">
+      <img src="{{ product.data.image }}" alt="{{ product.data.title }}" class="object-cover rounded-2xl rounded-b-none object-center w-full h-80" />
+    </header>
+    
+    <main class="px-3 pt-3 border-2 border-[var(--product-card-bd)] border-y-0">
+      <h2 class="text-xl font-serif font-bold">{{ product.data.title }}</h2>
+      <div class="pt-3 h-27">{{ product.content | safe }}</div>
       
-      <header class="rounded-lg">
-        <img src="{{ product.data.image }}" alt="{{ product.data.title }}" class="object-cover object-center w-40 h-40" />
-      </header>
-      
-      <h2>{{ product.data.title }}</h2>
-      <p>{{ product.content | safe }}</p>
-      
-      <hr />
+      <hr class="my-3 rounded-full border-t-2 border-b-0 border-[var(--product-card-bd)]" />
       
       {% if product.data.price_discount %}
-      <h3>${{ product.data.price_discount }} <span class="text-gray-500">{{ product.data.price }}</span></h3>
+      <h3 class="text-green-800 flex gap-3 font-bold text-3xl">${{ product.data.price_discount }} <del class="text-gray-400 self-end text-lg">${{ product.data.price }}</del></h3>
       {% else %}
-      <h3>${{ product.data.price }}</h3>
-      {% endif %}
+      <h3 class="text-green-800 font-bold text-3xl">${{ product.data.price }}</h3>
       
-    </article>
-    {% endfor %}
-  </div>
-  <p x-show="!$el.previousElementSibling.querySelector('article:not([style*=\'display: none\'])')" x-cloak>No products found..</p>
+      {% endif %}
+    </main>
+    
+    <footer class="px-3 pt-2 pb-4 border-2 border-[var(--product-card-bd)] border-t-0 rounded-b-2xl relative bottom-0 w-full grid grid-cols-2 justify-between gap-3">
+      <div class="border-2 border-[var(--product-card-bd)] rounded-lg grid grid-cols-3 gap-1">
+        <button class="p-1 text-xl border-r-2 bg-[var(--page-bg)] rounded-l-lg border-[var(--product-card-bd)]">-</button>
+        <button class="p-1 text-xl">1</button>
+        <button class="p-1 text-xl border-l-2 bg-[var(--page-bg)] border-[var(--product-card-bd)] rounded-r-lg">+</button>
+      </div>
+      <button class="bg-green-800 text-white rounded-lg p-2 font-medium flex gap-2 items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 256 256"><rect fill="none"/><path d="M188,184H91.17a16,16,0,0,1-15.74-13.14L48.73,24H24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="92" cy="204" r="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="188" cy="204" r="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M70.55,144H196.1a16,16,0,0,0,15.74-13.14L224,64H56" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+        
+        Add to Cart</button>
+    </footer>
+  </article>
+  {% endfor %}
 </section>
 
+<section x-show="!$el.previousElementSibling.querySelector('article:not([style*=\'display: none\'])')" x-cloak>
+No products found..
+</section>
 
 <!-- Trust -->
 <section class="border border-2 rounded-2xl border-slate-300 sm:py-0 sm:px-3  grid grid-cols-1 sm:grid-cols-4">
