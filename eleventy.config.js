@@ -12,7 +12,8 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection("reviews", function(collectionApi) {
     return collectionApi.getFilteredByGlob("content/reviews/*.md");
   });
-
+  
+  eleventyConfig.addPassthroughCopy("assets/theme.js");
   eleventyConfig.addPassthroughCopy({ "images": "images" });
   eleventyConfig.addPassthroughCopy("admin");
 
