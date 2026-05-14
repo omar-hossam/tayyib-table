@@ -57,14 +57,13 @@ title: Tayyib Table - Menu
 </section>
 
 
-
 <!-- Products -->
 <section class="grid grid-cols-1 gap-5 justify-between sm:grid-cols-3 sm:gap-10" id="products">
   {% for product in collections.products %}
   <article x-show="(filter === 'All' || '{{ product.data.category }}' === filter) && ('{{ product.data.title }}'.toLowerCase().includes(search.toLowerCase()))" x-transition class="sm:w-80 shadow-xl overflow-hidden rounded-b-2xl relative bg-white">
     
     <header class="rounded-xl">
-      <img src="{{ product.data.image }}" alt="{{ product.data.title }}" class="object-cover rounded-2xl rounded-b-none object-center w-full h-80" />
+      <img src="{{ product.data.image | webp }}" alt="{{ product.data.title }}" class="object-cover rounded-2xl rounded-b-none object-center w-full h-80" />
     </header>
     
     <main class="px-3 pt-3 border-2 border-[var(--product-card-bd)] border-y-0">
