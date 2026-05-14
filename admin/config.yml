@@ -13,6 +13,27 @@ site_url: http://localhost:8080
 display_url: http://localhost:8080
 
 collections:
+  - name: "info"
+    label: "Restaurant Info"
+    label_singular: "Info"
+    folder: "content/info"
+    create: false
+    format: "json"
+    slug: "info"
+    fields:
+      - { label: "Logo", name: "logo", widget: "image", required: true }
+      - { label: "About us", name: "about", hint: "3 or 4 short sentences about the restaurant", widget: "text", required: true }
+      - { label: "Phone", name: "phone", widget: "string", required: true }
+      - { label: "WhatsApp Phone", name: "whatsapp", widget: "string", required: true }
+      - { 
+        label: "Opening Hours", 
+        name: "hours", 
+        widget: "string", 
+        default: "Everyday: 9 AM – 11 PM",
+        hint: "Examples: 'Everyday: 9 AM – 11 PM' or 'Mon–Thu: 9am–10pm, Fri–Sat: 9am–12am'" 
+      }
+      - { label: "Address (Google maps link)", name: "maps_link", widget: "string", default: "https://maps.app.goo.gl/...", required: true }
+
   - name: "products"
     label: "Products"
     label_singular: "Product"
