@@ -59,7 +59,7 @@ title: Tayyib Table - Menu
 
 
 <!-- Products -->
-<section class="grid grid-cols-1 gap-5 justify-between sm:grid-cols-3 sm:gap-10">
+<section class="grid grid-cols-1 gap-5 justify-between sm:grid-cols-3 sm:gap-10" id="products">
   {% for product in collections.products %}
   <article x-show="(filter === 'All' || '{{ product.data.category }}' === filter) && ('{{ product.data.title }}'.toLowerCase().includes(search.toLowerCase()))" x-transition class="sm:w-80 shadow-xl overflow-hidden rounded-b-2xl relative bg-white">
     
@@ -96,7 +96,7 @@ title: Tayyib Table - Menu
   {% endfor %}
 </section>
 
-<section x-show="!$el.previousElementSibling.querySelector('article:not([style*=\'display: none\'])')" x-cloak>
+<section id="no-products-section" class="none bg-blue-500 p-5 w-full text-white text-center">
 No products found..
 </section>
 
@@ -141,60 +141,31 @@ No products found..
     </div>
   </div>
 </section>
-
-<!--
-  <section class="container">
-    <header class="group">
-      <div class="grid">
-        
-      </div>
-    </header>
-
-    <div class="grid">
-      {% for product in collections.products %}
-      <article 
-        x-show="
-          (filter === 'All' || '{{ product.data.category }}' === filter) && 
-          ('{{ product.data.title }}'.toLowerCase().includes(search.toLowerCase()))
-        "
-        x-data="{ count: 0 }"
-        x-transition
-      >
-        <header class="product-header">
-          <div>
-            <img src="{{ product.data.image }}" alt="{{ product.data.title }}">
-          </div>
-        </header>
-        
-        <div class="grid">
-          <h3>{{ product.data.title }}</h3>
-          <p style="text-align: right;" class="product-price">${{ product.data.price }}</p>
-        </div>
-        
-        <p>{{ product.content | safe }}</p>
-        
-        <span class="category">{{ product.data.category }}</span>
-        <footer class="grid">
-          <div class="quantity">
-            <button @click="count > 0 ? count-- : count -= 0" class="contrast" style="border-top-right-radius: 0; border-right: 0; border-bottom-right-radius: 0">
-              <svg xmlns="http://www.w3.org/2000/svg" style="width: 2.2rem; height: 2.2rem" viewBox="0 0 256 256"><rect  fill="none"/><line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
-            </button>
-            
-            <p x-text="count" style="border-radius: 0; font-size: 1.5rem; font-weight: bold; display: flex; justify-content: center; align-items: center; height: 100%; background-color: var(--pico-secondary); color: #fff; "></p>
-            
-            <button @click="count++" class="contrast" style="border-top-left-radius: 0; border-left: 0; border-bottom-left-radius: 0">
-              <svg xmlns="http://www.w3.org/2000/svg" style="width: 2.2rem; height: 2.2rem" viewBox="0 0 256 256"><rect fill="none"/><line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="128" y1="40" x2="128" y2="216" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
-            </button>
-          </div>
-          <button>Add to Cart</button>
-        </footer>
-      </article>
-      {% endfor %}
-    </div>
-
-    <p x-show="document.querySelectorAll('article:not([style*=\'display: none\'])').length === 0" x-cloak>
-      No products found... 
-    </p>
-  </section>
--->
 </main>
+
+<script>
+  const noMsg = document.getElementById('no-products-section');
+  const products = document.getElementById('products');
+  
+  function myCheck() {
+    if (products.children.length === 0) {
+      noMsg.style.display = "block";
+    }
+    else {
+      let hidden = 0
+      products.querySelectorAll('article').forEach(p => {
+        hidden += window.getComputedStyle(p).display === 'none' ? 1 : 0;
+      })
+      
+      if (hidden === products.children.length) {
+        noMsg.style.display = "block";
+      } else {
+        noMsg.style.display = "none";
+      }
+    }
+    setTimeout(myCheck, 500);
+  }
+  
+  myCheck();
+  
+</script>
