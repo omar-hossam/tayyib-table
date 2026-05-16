@@ -58,7 +58,10 @@ collections:
             "Specials / Offers"
           ], required: true
       }
-      - { label: "Description", name: "body", widget: "markdown", required: true }
+      - { label: "Description", name: "body", widget: "text",
+       pattern: ["^.{1,110}$", "Maximum 110 characters - no line breaks allowed"]
+       hint: "Keep as a single line, max 110 characters"
+       required: true }
       - { label: "Product Image", name: "image", widget: "image", required: true }
 
   - name: "offers"
